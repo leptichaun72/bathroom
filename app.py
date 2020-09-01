@@ -14,7 +14,7 @@ project_dir = os.path.dirname(os.path.abspath(__file__))
 db_file = "sqlite:///{}".format(os.path.join(project_dir, "usetoilet.db"))
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = db_file
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://llzzgrcd:iRMc90xCWyHxUcUhhmXxmt7SRB6WKQ2k@otto.db.elephantsql.com:5432/llzzgrcd"
 
 db = SQLAlchemy(app)
 
