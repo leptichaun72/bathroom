@@ -1,3 +1,12 @@
+### sqlA HELPERS
+def lclass():
+    print db.engine.table_names()
+def lfield():
+    pass
+def getall(param):
+    db.session.rollback()
+    print(db.session.query(param).all())
+
 ### PACKAGES
 import os
 
