@@ -1,11 +1,21 @@
-### sqlA HELPERS
+### sqlAlchemy HELPERS
 def lclass():
     print db.engine.table_names()
-def lfield():
-    pass
-def getall(param):
-    db.session.rollback()
-    print(db.session.query(param).all())
+def lfield(classname):
+    print classname.__table__.columns.keys()
+def getall(classname):
+    print classname.query.all()
+def getdate():
+    return datetime.now().strftime("%b %d %Y %X")
+def table(tablename):
+    prompt = input("Enter 1.Create table \
+2.Delete table: ")
+    if prompt==1:
+        tablename.__table__.create(db.engine)
+    elif prompt==2:
+        tablename.__table__.drop(db.engine)
+    else:
+        print "Try Again"
 
 ### PACKAGES
 import os
@@ -30,26 +40,32 @@ db = SQLAlchemy(app)
 ### MODELS
 class Person(db.Model):
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(10),nullable=False)
+    name = db.Column(db.String(10),unique=True,nullable=False)
     memo = db.Column(db.String(25))
     uses = db.relationship("Use", backref="person", lazy=True)
 
     def __repr__(self):
-        return "<PERSON %r>" %self.name
+        return "<PERSON %r>" % self.name
 
 class Use(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
-    start_time = db.Column(db.DateTime,nullable=False)
-    finish_time = db.Column(db.DateTime)
+    start = db.Column(db.DateTime,nullable=False)
+    finish = db.Column(db.DateTime)
+
+    @property
+    def startime(self):
+        return self.start.strftime("%b %-d '%y %-I:%M:%S %p")
+        #return self.start.isoformat()
 
     def __repr__(self):
-        return "<USE starts at %r>" %self.start_time
+        return "<USE starts at %r>" % self.start
 
 ###ROUTES
 @app.route("/")
 def index():
-    return render_template("index.html")
+    people = Person.query.join(Use).all()
+    return render_template("index.html", people=people)
 
 ###RUN
 app.run(debug=True)

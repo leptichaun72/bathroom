@@ -1,1 +1,34 @@
-i got a lovely bunch of coca nut
+<!doctype html>
+<html>
+<head>
+<style>
+  .parent {
+    display: flex;
+    background: blue;
+  }
+</style>
+</head>
+<body>
+<div class="parent">
+  {% for person in people %}
+  <div class="child">
+    <h1>{{ person.name }}</h1>
+  </div>
+  {% endfor %}
+</div>
+<ul style="font-size:3em">
+  {% for person in people %}
+  <li>
+    {{ person.name}}<br>
+    <ol>
+      {% for use in person.uses %}
+      <li>      
+        {{ use.startime }}
+      </li>
+      {% endfor %}
+    </ol>
+  </li>
+  {% endfor %}
+</ul>
+</body>
+</html>
