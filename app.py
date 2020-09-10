@@ -35,7 +35,7 @@ db_file = "sqlite:///{}".format(os.path.join(project_dir, "usetoilet.db"))
 elephantdb = "postgres://llzzgrcd:iRMc90xCWyHxUcUhhmXxmt7SRB6WKQ2k@otto.db.elephantsql.com:5432/llzzgrcd"
 herokudb = "postgres://nyujdikmxeclmz:eca2da8f584812b64eea2fee888196c41ec538442d04709a9dcbdf80299a4bd1@ec2-54-161-58-21.compute-1.amazonaws.com:5432/df3nii1veq5dub"
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = elephantdb
+app.config["SQLALCHEMY_DATABASE_URI"] = db_file
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 db = SQLAlchemy(app)
