@@ -84,4 +84,5 @@ def tehe():
     return render_template("tehe.html", people=people)
 
 ###RUN
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
