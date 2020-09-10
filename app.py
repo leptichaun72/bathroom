@@ -1,6 +1,7 @@
 ### sqlAlchemy HELPERS
 def lclass():
-    print db.engine.table_names()
+    try:
+        print db.engine.table_names()
 def lfield(classname):
     print classname.__table__.columns.keys()
 def getall(classname):
