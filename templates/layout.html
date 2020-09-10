@@ -4,8 +4,16 @@
 <style>
   .parent {
     display: flex;
-    background: blue;
+    flex-direction: column;
+    font-size: 2em;
+    height: 100px;
+    background: orange;
   }
+  .child {
+    margin: .1em;
+    background: skyblue;
+  }
+  form { display: inline; }
 </style>
 </head>
 <body>
@@ -13,13 +21,9 @@
   {% for person in people %}
   <div class="child">
     <h1>{{ person.name }}</h1>
-  </div>
-  {% endfor %}
-</div>
-<ul style="font-size:3em">
-  {% for person in people %}
-  <li>
-    {{ person.name}}<br>
+    <form action="/create/{{person.id}}">
+      <input type="submit" value="ADD" />
+    </form>
     <ol>
       {% for use in person.uses %}
       <li>      
@@ -27,8 +31,8 @@
       </li>
       {% endfor %}
     </ol>
-  </li>
+  </div>
   {% endfor %}
-</ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,29 @@
+extends mix.jade
+
+block main
+  .sheet
+    each person in people
+      .card
+        table.table.table-striped
+          thead
+            tr
+              th
+                h6= person.name
+            tr
+              th
+                a(href="create/#{person.id}/1").btn-xs &#x1F6EB;
+              th 
+                a(href="create/#{person.id}/2").btn-xs &#x1F6EC;
+          tbody
+            each use in person.uses
+              tr
+                td 
+                  p= use._start_date
+                  p= use._start_time
+                td 
+                  p= use._finish_date
+                  p= use._finish_time
+
+  each word in people
+    li= word
+  +entry("https://www.google.com", "Google")

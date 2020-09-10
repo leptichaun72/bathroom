@@ -1,0 +1,12 @@
+body {
+    font-size: 0.8em;
+}
+
+.sheet {
+    display: flex;
+}
+
+.card {
+    flex: 1;
+}
+

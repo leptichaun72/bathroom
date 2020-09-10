@@ -7,7 +7,7 @@ def getall(classname):
     print classname.query.all()
 def getdate():
     return datetime.now().strftime("%b %d %Y %X")
-def table(tablename):
+def modtable(tablename):
     prompt = input("Enter 1.Create table \
 2.Delete table: ")
     if prompt==1:
@@ -34,6 +34,7 @@ db_file = "sqlite:///{}".format(os.path.join(project_dir, "usetoilet.db"))
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://llzzgrcd:iRMc90xCWyHxUcUhhmXxmt7SRB6WKQ2k@otto.db.elephantsql.com:5432/llzzgrcd"
+app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 db = SQLAlchemy(app)
 
@@ -50,13 +51,26 @@ class Person(db.Model):
 class Use(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
-    start = db.Column(db.DateTime,nullable=False)
-    finish = db.Column(db.DateTime)
+    start = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+    finish = db.Column(db.DateTime,)
 
     @property
-    def startime(self):
+    def _start_datetime(self):
         return self.start.strftime("%b %-d '%y %-I:%M:%S %p")
         #return self.start.isoformat()
+
+    @property
+    def _start_date(self):
+        return self.start.strftime("%b %-d '%y")
+    @property
+    def _start_time(self):
+        return self.start.strftime("%-I:%M:%S %p")
+    @property
+    def _finish_date(self):
+        return self.finish.strftime("%b %-d '%y")
+    @property
+    def _finish_time(self):
+        return self.finish.strftime("%-I:%M:%S %p")
 
     def __repr__(self):
         return "<USE starts at %r>" % self.start
@@ -64,8 +78,24 @@ class Use(db.Model):
 ###ROUTES
 @app.route("/")
 def index():
+    people = Person.query.all()
+    return render_template("index.jade", people=people)
+@app.route("/create/<int:personid>/<int:mode>")
+def create(personid, mode):
+    if(mode == 1):
+        use = Use(person_id=personid)  
+        db.session.add(use)
+    else:
+        lastentry = Person.query.filter_by(id=personid).first().uses[-1]
+        if(bool(lastentry.finish) == False):
+            lastentry.finish = datetime.utcnow()
+
+    db.session.commit()
+    return redirect('/')
+@app.route("/tehe")
+def tehe():
     people = Person.query.join(Use).all()
-    return render_template("index.html", people=people)
+    return render_template("tehe.html", people=people)
 
 ###RUN
 app.run(debug=True)
