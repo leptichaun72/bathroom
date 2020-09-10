@@ -2,6 +2,7 @@
 import os
 
 from datetime import datetime
+from pytz import timezone
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, \
     render_template, \
@@ -10,6 +11,9 @@ from flask import Flask, \
     url_for
 
 ### APP
+# define eastern timezone
+eastern = timezone('US/Eastern')
+
 project_dir = os.path.dirname(os.path.abspath(__file__))
 db_file = "sqlite:///{}".format(os.path.join(project_dir, "usetoilet.db"))
 
@@ -34,8 +38,8 @@ class Person(db.Model):
 class Use(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
-    start = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
-    finish = db.Column(db.DateTime,)
+    start = db.Column(db.DateTime(timezone=True),nullable=False,default=datetime.utcnow())
+    finish = db.Column(db.DateTime(timezone=True),)
 
     @property
     def _start_datetime(self):
@@ -70,12 +74,12 @@ def index():
 @app.route("/create/<int:personid>/<int:mode>")
 def create(personid, mode):
     if(mode == 1):
-        use = Use(person_id=personid)  
+        use = Use(person_id=personid,start=datetime.now(eastern))  
         db.session.add(use)
     else:
         lastentry = Person.query.filter_by(id=personid).first().uses[-1]
         if(bool(lastentry.finish) == False):
-            lastentry.finish = datetime.utcnow()
+            lastentry.finish = datetime.now(eastern)
 
     db.session.commit()
     return redirect('/')

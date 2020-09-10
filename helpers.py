@@ -16,3 +16,9 @@ def modtable(tablename):
         tablename.__table__.drop(db.engine)
     else:
         print "Try Again"
+def setup():
+    bg = Person(name="BG")
+    alan = Person(name="Alan")
+    brian = Person(name="Brian")
+    db.session.add_all([bg,alan,brian])
+    db.session.commit()
