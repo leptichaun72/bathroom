@@ -58,6 +58,10 @@ class Use(db.Model):
     def __repr__(self):
         return "<USE starts at %r>" % self.start
 
+###CREATE DB TABLES
+try:
+    db.create_all()
+
 ###ROUTES
 @app.route("/")
 def index():
