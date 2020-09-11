@@ -39,7 +39,7 @@ class Use(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
     start = db.Column(db.DateTime(timezone=False),nullable=False,default=datetime.utcnow())
-    finish = db.Column(db.DateTime(timezone=False),)
+    finish = db.Column(db.DateTime(timezone=True),)
 
     @property
     def _start_datetime(self):
