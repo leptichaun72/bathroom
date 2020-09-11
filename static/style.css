@@ -10,3 +10,23 @@ body {
     flex: 1;
 }
 
+caption {
+    text-align: center;
+    font-size: 2em;
+}
+
+thead tr {
+    display: block;
+}
+
+#end {
+    margin-left:22px;
+}
+
+tbody {
+    display: block;
+    height: 72vh;
+    width: 100%;
+    overflow: auto;
+
+}

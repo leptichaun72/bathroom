@@ -5,15 +5,13 @@ block main
     each person in people
       .card
         table.table.table-striped
+          caption= person.name
           thead
             tr
               th
-                h6= person.name
-            tr
-              th
-                a(href="create/#{person.id}/1").btn-xs &#x1F6EB;
+                a(href="create/#{person.id}/1").btn-xs#begin &#x1F6EB;
               th 
-                a(href="create/#{person.id}/2").btn-xs &#x1F6EC;
+                a(href="create/#{person.id}/2").btn-xs#end &#x1F6EC;
           tbody
             each use in person.uses
               tr
@@ -23,7 +21,4 @@ block main
                 td 
                   p= use._finish_date
                   p= use._finish_time
-
-  each word in people
-    li= word
   +entry("https://www.google.com", "Google")
