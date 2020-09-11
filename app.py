@@ -38,7 +38,7 @@ class Person(db.Model):
 class Use(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"), nullable=False)
-    start = db.Column(db.DateTime(timezone=False),nullable=False,default=datetime.utcnow())
+    start = db.Column(db.DateTime(timezone=False),nullable=False,)
     finish = db.Column(db.DateTime(timezone=True),)
 
     @property
