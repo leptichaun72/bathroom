@@ -83,10 +83,10 @@ def create(personid, mode):
 
     db.session.commit()
     return redirect('/')
-@app.route("/tehe")
-def tehe():
+@app.route("/layout")
+def layout():
     people = Person.query.join(Use).all()
-    return render_template("tehe.html", people=people)
+    return render_template("layout.html", people=people)
 
 ###RUN
 if __name__ == "__main__":
