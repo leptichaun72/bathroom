@@ -13,7 +13,7 @@ block main
               th 
                 a(href="create/#{person.id}/2").btn-xs#end &#x1F6EC;
           tbody
-            each use in person.uses
+            each use in person._usesrev
               tr
                 td 
                   p= use._start_date

@@ -34,6 +34,9 @@ class Person(db.Model):
 
     def __repr__(self):
         return "<PERSON %r>" % self.name
+    @property
+    def _usesrev(self):
+        return reversed(self.uses)
 
 class Use(db.Model):
     id = db.Column(db.Integer,primary_key=True)

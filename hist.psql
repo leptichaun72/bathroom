@@ -1,129 +1,29 @@
 \dtt
 \dt
-\dt
 select * from person;
 select * from use;
-\d
 \d use
 \d person
 \d
 \det
-select * from use;
-select * from person;
-select * from person;
-select * from person;
-select * from person;
-select * from person;
-select * from person;
-select * from person;
-\d person
-select * from person;
-select * from person;
-select * from person;
-select * from person;
-select * from person;
-\d person
-\d use
-\d use
-select * from person;
-select * from person;
-select * from use;
-select * from use;
-select * from use;
-select * from use;
-select * from person;
-select * from person;
-select * from person;
-select * from use;
-select * from use
-select * from person;
-select * from use;
-select * from person;
-select * from person;
-select * from use;
-\dt
-\dt
-select * from use;
-select * from person;
-\dt
-select * from use;
-select * from use;
-select * from person;
-select * from person;
-select * from use;
-select * from use;
-\d Person
-\d Person
-\d Person
-\d Use
-\d
-\dt
-\dt
-\dt
-\dt
-\dt
-\dt
-\dt
-\dt
-\dt
-\dt
-select * from use;
-select * from use;
-select * from use;
-select * from use;
-\d use
-\dt
-select * from person;
-select * from person;
-select * from use;
-select * from use;
-select * from person;
-select * from person;
-select * from use;
-select * from use;
-select * from person;
-join
 use join person
-select * from use;
-select * from use;
-select * from use;
-select * from use;
-select * from person;
-delete from
 delete from use where id=4
-select * from use;
-delete from
-delete from use where id=4;
-delete from
-delete from use where id=4
-g
-delete from
-delete from use where id=4;
-delete from use where id=4;
-select * from use;
 select * from person,use where
 use.person_id = person.id;
 select name, person.id, person_id, start from person,use where
 use.person_id = person.id;()
 date
 date.now
-;
 date.now()
-;
 time
-;
 current_timestamp
-;
 now()
-;
 \l
 \dn
 \df
 \dv
 \du
 select version();
-\g
-select * from use;
 \g
 \s
 \s myhist
