@@ -99,7 +99,7 @@ def newFn():
     adatetime = f"{adate or '2020-12-31'} {atime or '04:20'}:{sec_mcsec}"
     print(f"dtstring: {adatetime}")
     #dt_obj = datetime.fromisoformat(adatetime)
-    print(f"dtobj: {dt_obj}")
+    #print(f"dtobj: {dt_obj}")
 
     #use = Use(person_id=pname,start=datetime.now(),finish=datetime.now())  
     use = Use(person_id=pname,start=adatetime,finish=adatetime)  
