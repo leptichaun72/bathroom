@@ -1,5 +1,15 @@
 extends bass.jade
 
+//- Alert Mixin
+mixin alert(style, subj="DUMBLEDORE", msg="")
+  div( class=["alert", "alert-" + style, "alert-dismissable", fade, show] )
+    strong= subj
+    button.close( type="button", data-dismiss="alert" )
+      span(style="margin-top:12px;") &times;
+    p= msg
+    block
+
 mixin entry(url, text)
   h1= bobby
   a(href=url)= text
+

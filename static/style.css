@@ -2,6 +2,12 @@ body {
     font-size: 0.8em;
 }
 
+hr {
+    background-color: teal;
+    height: 2px;
+    width: 80%;
+}
+
 .sheet {
     display: flex;
 }
@@ -30,3 +36,4 @@ tbody {
     overflow: auto;
 
 }
+

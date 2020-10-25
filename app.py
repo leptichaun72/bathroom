@@ -86,11 +86,30 @@ def create(personid, mode):
 
     db.session.commit()
     return redirect('/')
-@app.route("/layout")
-def layout():
+@app.route("/new")
+def newFn():
     people = Person.query.join(Use).all()
-    return render_template("layout.html", people=people)
+    adate = request.args.get('adate') #2020-07-01
+    atime = request.args.get('atime') #21:35
+    pname = int(request.args.get('pname')) #3
+    print(f"datetime.now: {datetime.now()}")
+
+    print("secOnds : microSeconds")
+    sec_mcsec = datetime.now().strftime('%S.%f')
+    adatetime = f"{adate or '2020-12-31'} {atime or '04:20'}:{sec_mcsec}"
+    print(f"dtstring: {adatetime}")
+    dt_obj = datetime.fromisoformat(adatetime)
+    print(f"dtobj: {dt_obj}")
+
+    use = Use(person_id=pname,start=adatetime,finish=adatetime)  
+    print(use)
+
+    db.session.add(use)
+    db.session.commit()
+
+    return redirect('/')
+    #return render_template("new.jade", people=people)
 
 ###RUN
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
