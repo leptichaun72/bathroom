@@ -101,7 +101,8 @@ def newFn():
     dt_obj = datetime.fromisoformat(adatetime)
     print(f"dtobj: {dt_obj}")
 
-    use = Use(person_id=pname,start=adatetime,finish=adatetime)  
+    use = Use(person_id=pname,start=datetime.now(),finish=datetime.now())  
+    #use = Use(person_id=pname,start=adatetime,finish=adatetime)  
     print(use)
 
     db.session.add(use)
